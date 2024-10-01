@@ -38,4 +38,4 @@ gh-cli update-cli
 
 - other
 
-其他功能目前自己没需求所以没开发，如果有读者需要某个功能欢迎提issue，此外代码写的有点随意，勿喷！！！
+其他功能目前自己没需求所以没开发，如果有读者需要某个功能欢迎提[issue](https://github.com/Groos-dev/github-cli/issues)，此外代码写的有点随意，勿喷！！！
