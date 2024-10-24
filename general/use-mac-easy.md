@@ -77,3 +77,198 @@ VSCode 支持安装多种扩展插件来增强 Markdown 的编辑体验。常见
  • vscode-icons: 一个高度可定制的图标主题，支持文件和文件夹图标。
  • Material Icon Theme: 一个广泛使用的图标主题，支持 Material Design 风格的图标。
  • Ayu Icons: 提供简洁风格的文件和目录图标。
+
+
+
+## install lazyvim
+
+作用：高效配置vim，使用各种vim插件提升code效率
+
+linke: https://www.lazyvim.org/installation
+
+1. Make a backup of your current Neovim files:
+
+```shell
+# required
+mv ~/.config/nvim{,.bak}
+
+# optional but recommended
+mv ~/.local/share/nvim{,.bak}
+mv ~/.local/state/nvim{,.bak}
+mv ~/.cache/nvim{,.bak}
+```
+
+2. Clone the starter
+
+```shell
+git clone https://github.com/LazyVim/starter ~/.config/nvim
+```
+
+3. Remove the `.git` folder, so you can add it to your own repo later
+
+```shell
+rm -rf ~/.config/nvim/.git
+```
+
+4. Start Neovim!
+
+```shell
+nvim
+```
+
+## vscode configuration
+
+
+
+
+
+
+
+## vscode vim
+
+**mapkeys**
+
+| command | effect               |
+| ------- | -------------------- |
+| gcc     | comment              |
+| gc3j    | comment next 3 lines |
+| gc}     | annotated paragph    |
+|         |                      |
+|         |                      |
+
+**easymotion**
+
+install
+
+```shell
+vim.easymotion=true //in setting.json
+```
+
+## Lazy vim
+
+```lua
+
+  function _G.set_terminal_keymaps()
+  local opts = { buffer = 0 }
+  vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], opts)
+  vim.keymap.set("t", "jk", [[<C-\><C-n>]], opts)
+  vim.keymap.set("t", "<C-h>", [[<Cmd>wincmd h<CR>]], opts)
+  vim.keymap.set("t", "<C-j>", [[<Cmd>wincmd j<CR>]], opts)
+  vim.keymap.set("t", "<C-k>", [[<Cmd>wincmd k<CR>]], opts)
+  vim.keymap.set("t", "<C-l>", [[<Cmd>wincmd l<CR>]], opts)
+end
+
+-- if you only want these mappings for toggle term use term://*toggleterm#* instead
+vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
+
+```
+
+```lua
+-- Keymaps are automatically loaded on the VeryLazy event
+-- Default keymaps that are always set: https://github.com/LazyLazyVim/blob/main/lua/lazyvim/config/keymaps.lua
+-- Add any additional keymaps here
+local keymap = vim.keymap
+
+keymap.set("i", "jk", "<Esc>")
+keymap.set("n", "<leader>sv", "<C-W>v")
+keymap.set("n", "<leader>tt", "<cmd>ToggleTerm<cr>")
+keymap.set("n", "<C-j>", "<cmd>TmuxNavigateDown<cr>")
+keymap.set("n", "<C-k>", "<cmd>TmuxNavigateUp<cr>")
+
+-- tab nav
+keymap.set("n", "<leader>tn", "<cmd>tabnext<cr>")
+keymap.set("n", "<leader>tp", "<cmd>tabprev<cr>")
+keymap.set("n", "<leader>tl", "<cmd>tablast<cr>")
+keymap.set("n", "<leader>tf", "<cmd>tabfirst<cr>")
+
+-- telescope general
+keymap.set("n", "<leader>lds", "<cmd>Telescope lsp_document_symbols<cr>")
+keymap.set("n", "<leader>tgf", "<cmd>Telescope lsp_references<cr>")
+keymap.set("n", "<leader>cbf", "<cmd>Telescope current_buffer_fuzzy_find<cr>")
+-- telescope git commands
+keymap.set("n", "<leader>gc", "<cmd>Telescope git_commits<cr>") -- list all git commits (use <cr> to checkout) ["gc" for git commits]
+keymap.set("n", "<leader>gfc", "<cmd>Telescope git_bcommits<cr>") -- list git commits for current file/buffer (use <cr> to checkout) ["gfc" for git file commits]
+keymap.set("n", "<leader>gb", "<cmd>Telescope git_branches<cr>") -- list git branches (use <cr> to checkout) ["gb" for git branch]
+keymap.set("n", "<leader>gs", "<cmd>Telescope git_status<cr>") -- list current changes per file with diff preview ["gs" for git status]
+
+-- rust-tools
+keymap.set("n", "<leader>ha", "<cmd>RustHoverActions<cr>") -- list current changes per file with diff preview ["gs" for git status]
+
+-- lsp saga
+keymap.set("n", "gp", "<cmd>Lspsaga peek_definition<CR>")
+keymap.set("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>")
+keymap.set("n", "[d", "<cmd>Lspsaga diagnostic_jump_prev<CR>") -- jump to previous diagnostic in buffer
+keymap.set("n", "]d", "<cmd>Lspsaga diagnostic_jump_next<CR>")
+
+-- keymap
+keymap.set("n", "<leader>hw", ":HopWord<cr>")
+keymap.set("n", "<leader>hww", ":HopWordMW<cr>")
+keymap.set("n", "<leader>hc", ":HopChar1<cr>")
+keymap.set("n", "<leader>hcw", ":HopChar1MW<cr>")
+
+keymap.set("n", "<leader>ge", "<cmd>ChatGPTEditWithInstructions<cr>")
+```
+
+### hop
+
+- Leader + h + w (hop + word)
+- Leader + h + l (hop + l)
+
+### lsp
+
+```lua
+eturn {
+  "neovim/nvim-lspconfig",
+  init = function()
+    local keys = require("lazyvim.plugins.lsp.keymaps").get()
+    keys[#keys + 1] = { "<leader>ca", false }
+    keys[#keys + 1] = { "]d", false }
+    keys[#keys + 1] = { "[d]", false }
+  end,
+  opts = function(_, opts)
+    opts.autoformat = false
+  end,
+} 
+```
+
+### neotree
+
+```lua
+return {
+  "nvim-neo-tree/neo-tree.nvim",
+  opts = function(_, opts)
+    opts.window.mappings.o = "open"
+    opts.window.width = 27
+  end,
+}
+```
+
+## lazyvim 快捷键
+
+- <space>ff 项目中搜索文件
+- <space>ds 当前buffer搜索符号，如对象或者方法
+- gr : references 
+- gR File references
+- gd 查看定义 
+- gD go to sourceFile
+- gh 查看类的情况
+- gI Goto Implemetation
+- <leader> cr 修改符号
+
+### window 相关
+
+| **模式** |   快捷键    |       说明       | 所属插件 |
+| :------: | :---------: | :--------------: | -------- |
+|    n     | <leader> wd |     关闭窗口     | neotree  |
+|    n     | <C-h/j/k/l  | 选择上下左右窗口 | neotree  |
+|          |             |                  |          |
+
+### neotree
+
+| **模式** |   快捷键    |       说明       |
+| :------: | :---------: | :--------------: |
+|    n     | <leader> wd |     关闭窗口     |
+|    n     | <C-h/j/k/l  | 选择上下左右窗口 |
+|          |             |                  |
+
+### 
