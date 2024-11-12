@@ -15,10 +15,10 @@
 设置
 
 ```json
-    "editor.formatOnSave": true, 
+    "editor.formatOnSave": true,
     "editor.formatOnPaste": true,
     "[html]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode" 
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
 ```
 
@@ -31,7 +31,7 @@
 VSCode 支持安装多种扩展插件来增强 Markdown 的编辑体验。常见的插件包括：
 
 - Markdown All in One：提供自动补全、实时预览、格式化等功能。
-  
+
 - Markdown Preview Enhanced：增加了更丰富的预览功能，支持图表、流程图、数学公式等。
 - MarkdownLint：提供 Markdown 语法提示和修正建议，帮助你保持 Markdown 语法的整洁。
 
@@ -117,10 +117,39 @@ nvim
 ```
 
 ## vscode configuration
+### setting
+
+``` json
+{
+
+
+}
+```
 
 
 
+### plugins
 
+- Name: Noctis
+Id: liviuschera.noctis
+Description: Noctis is a collection of light & dark themes with a well balanced blend of warm and cold colors
+Version: 10.43.3
+Publisher: Liviu Schera
+VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=liviuschera.noctis
+
+- Name: Material Icon Theme
+Id: PKief.material-icon-theme
+Description: Material Design Icons for Visual Studio Code
+Version: 5.12.0
+Publisher: Philipp Kief
+VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=PKief.material-icon-theme
+
+- Name: Rainbow Brackets
+Id: tal7aouy.rainbow-bracket
+Description: A customizable extension for colorizing matching brackets and make your code amazing.
+Version: 1.0.2
+Publisher: Mhammed Talhaouy
+VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=tal7aouy.rainbow-bracket
 
 
 
@@ -228,7 +257,7 @@ eturn {
   opts = function(_, opts)
     opts.autoformat = false
   end,
-} 
+}
 ```
 
 ### neotree
@@ -247,9 +276,9 @@ return {
 
 - <space>ff 项目中搜索文件
 - <space>ds 当前buffer搜索符号，如对象或者方法
-- gr : references 
+- gr : references
 - gR File references
-- gd 查看定义 
+- gd 查看定义
 - gD go to sourceFile
 - gh 查看类的情况
 - gI Goto Implemetation
@@ -271,4 +300,103 @@ return {
 |    n     | <C-h/j/k/l  | 选择上下左右窗口 |
 |          |             |                  |
 
-### 
+###
+
+## Idea
+
+### plugin
+
+### IdeaVim
+
+config
+
+```shell
+" .ideavimrc is a configuration file for IdeaVim plugin. It uses
+"   the same commands as the original .vimrc configuration.
+" You can find a list of commands here: https://jb.gg/h38q75
+" Find more examples here: https://jb.gg/share-ideavimrc
+
+" set number relativenumer
+let mapleader = " "
+
+
+"" -- Suggested options --
+" Show a few lines of context around the cursor. Note that this makes the
+" text scroll if you mouse-click near the start or end of the window.
+set scrolloff=5
+
+" Do incremental searching.
+set incsearch
+
+" Don't use Ex mode, use Q for formatting.
+map Q gq
+nmap <C-o> :action Back<CR>
+nmap <C-i> :action Forward<CR>
+nmap <Leader>cr :action RenameElement<CR>
+" 映射快捷键：<Leader>gi 跳转到函数实现
+nmap <Leader>gi :action GotoImplementation<CR>
+nmap <Leader>gr :action GotoReference<CR>
+" nnoremap <silent> <Leader>gi :action GotoImplementation<CR>
+inoremap jk <ESC>
+nmap <Leader>w :action AceAction<CR>
+" nnoremap <Leader><Leader> :NERDTreeFind<CR>
+nnoremap <Leader>e :NERDTreeToggle<CR>
+nnoremap <Leader>sv :NERDTreeMirror<CR>  " 使用水平分割打开
+nnoremap <S-l> :tabn<CR>
+nnoremap <S-h> :tabp<CR>
+nnoremap <Leader>bd :tabclose<CR>
+noremap <Leader>wd :action CloseAllEditors<CR>
+
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+nnoremap <C-k> <C-w>k
+nnoremap <C-j> <C-w>j
+" 使用 <Leader>- 进行水平分割
+noremap <Leader>- :action SplitHorizontally<CR>
+
+" 使用 <Leader>| 进行垂直分割
+noremap <Leader>\ :action SplitVertically<CR>
+
+" --- Enable IdeaVim plugins https://jb.gg/ideavim-plugins
+
+
+" Highlight copied text
+Plug 'machakann/vim-highlightedyank'
+" Commentary plugin
+Plug 'tpope/vim-commentary'
+" easymotion
+Pugin 'easymotion/vim-easymotion'
+Plug 'https://github.com/easymotion/vim-easymotion'
+Plug 'vim-easymotion'
+set easymotion
+" nerdtree
+Plugin 'preservim/nerdtree'
+Plug 'https://github.com/preservim/nerdtree'
+Plug 'nerdtree'
+set NERDTree
+
+"" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
+"" Map \r to the Reformat Code action
+"map \r <Action>(ReformatCode)
+
+"" Map <leader>d to start debug
+"map <leader>d <Action>(Debug)
+
+"" Map \b to toggle the breakpoint on the current line
+"map \b <Action>(ToggleLineBreakpoint)
+
+set clipboard=unnamedplus
+" 启用忽略大小写
+set ignorecase
+" 启用智能区分大小写
+set smartcase
+set which-key
+
+```
+
+#### Idea-vim-plugin
+
+https://github.com/JetBrains/ideavim/wiki/IdeaVim%20Plugins#easymotion
+
+- NERDTree
+- 
